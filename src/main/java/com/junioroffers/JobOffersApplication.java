@@ -4,9 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JobOffersSpringBootApplication {
+//@EnableConfigurationProperties(value = {JwtConfigurationProperties.class})
+public class JobOffersApplication {
     public static void main(String[] args) {
-        SpringApplication.run(JobOffersSpringBootApplication.class, args);
+        SpringApplication.run(JobOffersApplication.class, args);
     }
 
 }

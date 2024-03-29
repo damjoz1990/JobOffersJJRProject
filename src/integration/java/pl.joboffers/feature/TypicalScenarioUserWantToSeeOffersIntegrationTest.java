@@ -3,31 +3,37 @@ package pl.joboffers.feature;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.junioroffers.domain.offer.OfferFetchable;
 import com.junioroffers.domain.offer.dto.JobOfferResponse;
+import com.junioroffers.infrastructure.scheduler.HttpOfferScheduler;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import pl.joboffers.BaseIntegrationTest;
 import pl.joboffers.SampleJobOfferResponse;
 
+import java.time.Duration;
 import java.util.List;
+
+import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 public class TypicalScenarioUserWantToSeeOffersIntegrationTest extends BaseIntegrationTest implements SampleJobOfferResponse {
 
     @Autowired
-    OfferFetchable offerFetchable;
+    HttpOfferScheduler httpOfferScheduler;
     @Test
     public void user_want_to_see_offers_but_have_to_be_logged_in_and_external_server_should_have_some_offers(){
-
+        //step 1: there are no offers in external HTTP server
         wireMockServer.stubFor(WireMock.get("/offers")
                 .willReturn(WireMock.aResponse()
                         .withStatus(HttpStatus.OK.value())
                         .withHeader("Content-Type", "application/json")
                         .withBody(bodyWithTwoOffersJson())));
 
+        //step 2: scheduler ran 1st time and made GET to external server and system added 0 offers to database
+        httpOfferScheduler.fetchAllOffersAndSaveAllIfNotExists();
+        //await()
+        //        .atMost(Duration.ofSeconds(20))
+        //        .until(()-> false);
 
-        List<JobOfferResponse> jobOfferResponses = offerFetchable.fetchOffers();
-//    step 1: there are no offers in external HTTP server
-//    step 2: scheduler ran 1st time and made GET to external server and system added 0 offers to database
 //    step 3: user tried to get JWT token by requesting POST /token with username=someUser, password=somePassword and system returned UNAUTHORIZED(401)
 //    step 4: user made GET /offers with no jwt token and system returned UNAUTHORIZED(401)
 //    step 5: user made POST /register with username=someUser, password=somePassword and system registered user with status OK(200)
