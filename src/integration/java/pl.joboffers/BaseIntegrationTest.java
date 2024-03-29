@@ -2,7 +2,7 @@ package pl.joboffers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
-import com.junioroffers.JobOffersSpringBootApplication;
+import com.junioroffers.JobOffersApplication;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,7 +18,7 @@ import org.testcontainers.utility.DockerImageName;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 
 @ActiveProfiles("integration")
-@SpringBootTest(classes = JobOffersSpringBootApplication.class)
+@SpringBootTest(classes = JobOffersApplication.class)
 @AutoConfigureMockMvc
 @Testcontainers
 public class BaseIntegrationTest {
