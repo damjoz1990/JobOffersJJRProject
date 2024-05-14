@@ -1,4 +1,4 @@
-package com.junioroffers.infrastructure.offer;
+package com.junioroffers.infrastructure.offer.http;
 
 import com.junioroffers.domain.offer.OfferFetchable;
 import java.time.Duration;
