@@ -1,4 +1,4 @@
-package com.junioroffers.infrastructure.offer;
+package com.junioroffers.infrastructure.offer.http;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;

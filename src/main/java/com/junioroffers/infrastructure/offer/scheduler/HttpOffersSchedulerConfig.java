@@ -1,4 +1,4 @@
-package com.junioroffers.infrastructure.scheduler;
+package com.junioroffers.infrastructure.offer.scheduler;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Conditional;
