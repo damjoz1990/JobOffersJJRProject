@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery;
+import org.springframework.dao.DuplicateKeyException;
 
 import java.util.List;
 import java.util.Map;
@@ -46,7 +47,7 @@ public class InMemoryOfferRepository implements OfferRepository {
     @Override
     public <S extends Offer> S save(S entity) {
         if (database.values().stream().anyMatch(offer -> offer.offerUrl().equals(entity.offerUrl()))) {
-            throw new OfferDuplicateException(entity.offerUrl());
+            throw new DuplicateKeyException(String.format("Offer with offerUrl [%s] already exists", entity.offerUrl()));
         }
         UUID id = UUID.randomUUID();
         Offer offer = new Offer(
