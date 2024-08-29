@@ -22,3 +22,9 @@ http:
 
 scheduling:
   enabled: true
+
+auth:
+  jwt:
+    secret: ${JWT_SECRET:dsafh32i489012uerqwkljndaswiuhdc89h3w1brfduasdch87ey2q3brfed98scyt8d7sgefb32io98rfdyhcs12312424t6ywegrfvd5ujiu4aedajnhe5ui57}
+    issuer: job-offers-backend
+    expirationDays: 30
